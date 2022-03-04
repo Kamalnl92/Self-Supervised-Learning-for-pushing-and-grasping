@@ -47,5 +47,27 @@ singularity .sif image file can be downloaded from [.sif](https://drive.google.c
 It contains Ubnutu 20.04 image and all the required packages to run the model training and testing. 
 
 ## Train
+```
+# Grasp Goal agnostic
+python main.py --stage grasp_only --num_obj 5 --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations
+```
 
+```
+# Grasp Goal conditioned
+python main.py --stage grasp_only --num_obj 5 --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations --grasp_explore --load_explore_snapshot --explore_snapshot_file '.pth file from the previous training'
+```
+
+```
+# Alternate to grasp training
+python main.py --stage push_only --alternating_training --grasp_goal_conditioned --goal_conditioned --goal_obj_idx k --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file '.pth file from the previous training' 
+```
+
+```
+# Alternate to push training
+python main.py --stage push_only --alternating_training --grasp_goal_conditioned --goal_conditioned --goal_obj_idx k --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file 'DIRECTORY OF YOUR PRE-TRAINDE GOAL-CONDITIONED PUSH-GRASP NET' 
+```
+
+```
+python main.py --stage push_only --grasp_reward_threshold Qg --grasp_goal_conditioned --goal_conditioned --goal_obj_idx k --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file 'DIRECTORY OF YOUR PRE-TRAINDE GOAL-CONDITIONED PUSH-GRASP NET' 
+```
 ## Test
