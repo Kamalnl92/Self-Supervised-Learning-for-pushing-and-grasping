@@ -36,6 +36,7 @@ singularity .sif image file can be downloaded from [.sif](https://drive.google.c
 It contains Ubnutu 20.04 image and all the required packages to run the model training and testing. One needs to bind the project file to be able to run the project.
 
 ## Train
+ We  trained  the  modelsusing  NVIDIA  V100  Graphics  Processing  Unit  for  fastertraining  time.
 ### Train Grasp
 ```
 # Grasp Goal agnostic
@@ -82,3 +83,5 @@ python evaluate.py
 ## Acknowledgment
 
 We made use of the code made by https://github.com/xukechun/Efficient_goal-oriented_push-grasping_synergy 
+
+We  thank  the  Center  for  Information  Technology  of  theUniversity of Groningen for their support and for providingaccess to the Peregrine high performance computing cluster.
