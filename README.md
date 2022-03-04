@@ -86,7 +86,7 @@ Unstructured case of testing keep the goal object set below to 1 since the goal 
 python main.py --stage push_grasp --num_obj c --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/Test0.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 > test2.txt
 ```
 ## Evaluation
-
+First modify the directory to the teminal out put text file (i.e., test1.txt), then run the below script.
 ```
 python evaluate.py
 ```
