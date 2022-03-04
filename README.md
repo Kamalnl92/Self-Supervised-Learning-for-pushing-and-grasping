@@ -66,6 +66,7 @@ python main.py --stage push_only --alternating_training --grasp_goal_conditioned
 python main.py --stage push_only --grasp_reward_threshold 1.8 --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file '.pth file from the previous training' 
 ```
 ## Testing
+pre-trained model can be downloaded [model](https://drive.google.com/drive/folders/1KaAugjPULuasGZQbJVwtFDrTRwi36jLD?usp=sharing)
 
 ### Test 1
 Compact scenario where the target object is occluded with structured clutter, The termianl output is saved to a text file so that can be later used for evaluation.
