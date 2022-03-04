@@ -75,12 +75,12 @@ python main.py --stage push_only --grasp_reward_threshold 1.8 --grasp_goal_condi
 ```
 ## Test
 
-### Test1
-Compact scenario where the target object is occluded with structured clutte
+### Test 1
+Compact scenario where the target object is occluded with structured clutter
 ```
 python main.py --stage push_grasp --num_obj 10 --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/test-10-obj-06.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
 ```
-### Test2
+### Test 2
 Unstructured case of testing keep the goal object is set below to 1 since the goal object has to be the green object, c is the number of objects that can be placed in the environment, max 20
 ```
 python main.py --stage push_grasp --num_obj c --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/Test0.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
