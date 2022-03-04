@@ -13,6 +13,8 @@ rained models and source code for the results reproducibility purpose are public
 
 ![Alt Text](images/figures.gif)
 
+## scenarios showcasing clearing goal-object by pushing to be eventually grasped   
+![Alt Text](images/shortvideo.gif)
 ## Installation
 ### Method 1 (Ubuntu 18.04)
 - Python 3.6
