@@ -21,14 +21,14 @@ rained models and source code for the results reproducibility purpose are public
 - CoppeliaSim_Edu_V4_1_0_Ubuntu18_04
 
 ```
-pip install -r requirementMethod1.txt
+pip install -r requirementsMethod1.txt
 ```
 
 ### Method 2 (Ubuntu 20.04)
 - Python 3.8
 - CoppeliaSim_Edu_V4_2_0_Ubuntu20_04
 ```
-pip install -r requirementMethod2.txt
+pip install -r requirementsMethod2.txt
 ```
 
 ### Method 3 Singularity Container
