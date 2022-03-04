@@ -44,9 +44,10 @@ rained models and source code for the results reproducibility purpose are public
 We have made a container publicly available which is useful to be used in High Performance Computing (HPC) clusters
 
 singularity .sif image file can be downloaded from [.sif](https://drive.google.com/drive/folders/1KaAugjPULuasGZQbJVwtFDrTRwi36jLD?usp=sharing) 
-It contains Ubnutu 20.04 image and all the required packages to run the model training and testing. 
+It contains Ubnutu 20.04 image and all the required packages to run the model training and testing. One needs to bind the project file to be able to run the project.
 
 ## Train
+### Train Grasp
 ```
 # Grasp Goal agnostic
 python main.py --stage grasp_only --num_obj 5 --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations
@@ -56,12 +57,13 @@ python main.py --stage grasp_only --num_obj 5 --goal_conditioned --goal_obj_idx 
 # Grasp Goal conditioned
 python main.py --stage grasp_only --num_obj 5 --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations --grasp_explore --load_explore_snapshot --explore_snapshot_file '.pth file from the previous training'
 ```
-
+### Train Push
 ```
 # Push training
 python main.py --stage push_only --alternating_training --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file '.pth file from the previous training' 
 ```
-
+### Train Alternate
+To minimize the distribution mismatch problem we alternate the training we first start with the grasp training since the push has improved in performance compared to the previous stage.
 ```
 # Alternate to grasp training
 python main.py --stage push_only --alternating_training --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file '.pth file from the previous training' 
@@ -72,9 +74,18 @@ python main.py --stage push_only --alternating_training --grasp_goal_conditioned
 python main.py --stage push_only --grasp_reward_threshold 1.8 --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file '.pth file from the previous training' 
 ```
 ## Test
+
+### Test1
+Compact scenario where the target object is occluded with structured clutte
 ```
-python main.py --stage push_grasp --num_obj 10 --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/test-10-obj-06.txt' --load_snapshot --snapshot_file '.pth trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
+python main.py --stage push_grasp --num_obj 10 --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/test-10-obj-06.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
 ```
+### Test2
+Unstructured case of testing keep the goal object is set below to 1 since the goal object has to be the green object, c is the number of objects that can be placed in the environment, max 20
+```
+python main.py --stage push_grasp --num_obj c --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/Test0.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
+```
+
 ## Acknowledgment
 
 We made use of the code made by https://github.com/xukechun/Efficient_goal-oriented_push-grasping_synergy 
