@@ -76,16 +76,20 @@ python main.py --stage push_only --grasp_reward_threshold 1.8 --grasp_goal_condi
 ## Test
 
 ### Test 1
-Compact scenario where the target object is occluded with structured clutter
+Compact scenario where the target object is occluded with structured clutter, The termianl output is saved to a text file so that can be later used for evaluation.
 ```
-python main.py --stage push_grasp --num_obj 10 --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/test-10-obj-06.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
+python main.py --stage push_grasp --num_obj 10 --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/test-10-obj-06.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 > test1.txt
 ```
 ### Test 2
-Unstructured case of testing keep the goal object set below to 1 since the goal object has to be the green object, c is the number of objects that can be placed in the environment, max 20. Thhere are more test files in the directory with a different goal object shape that can be used.
+Unstructured case of testing keep the goal object set below to 1 since the goal object has to be the green object, c is the number of objects that can be placed in the environment, max 20. Thhere are more test files in the directory with a different goal object shape that can be used. The termianl output is saved to a text file so that can be later used for evaluation.
 ```
-python main.py --stage push_grasp --num_obj c --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/Test0.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
+python main.py --stage push_grasp --num_obj c --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/Test0.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 > test2.txt
 ```
+## Evaluation
 
+```
+python evaluate.py
+```
 ## Acknowledgment
 
 We made use of the code made by https://github.com/xukechun/Efficient_goal-oriented_push-grasping_synergy 
