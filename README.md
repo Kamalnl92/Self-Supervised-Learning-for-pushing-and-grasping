@@ -11,7 +11,7 @@ approach, we performed two extensive sets of experiments in packed objects and a
 showed that the proposed method worked very well in both scenarios and outperformed the recent state-of-the-art approach.
 rained models and source code for the results reproducibility purpose are publicly available.
 
-![Alt Text](images/PushGrasp.gif)
+![Alt Text](images/figures.gif)
 
 ## Installation
 ### Method 1 (Ubuntu 18.04)
