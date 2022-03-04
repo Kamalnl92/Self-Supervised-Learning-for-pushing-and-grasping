@@ -1,5 +1,5 @@
 The official repository for the paper: 
-#Self-Supervised Learning for Joint Pushing and Grasping Policies in Highly Cluttered Environments
+# Self-Supervised Learning for Joint Pushing and Grasping Policies in Highly Cluttered Environments
 
 Demo Video: [YouTube](https://www.youtube.com/watch?v=EUrUt9XO7sI&t=1s&ab_channel=KamalMokhtar)
 
@@ -13,8 +13,8 @@ rained models and source code for the results reproducibility purpose are public
 
 ![Alt Text](images/PushGrasp.gif)
 
-##Installation
-###Method 1 (Ubuntu 18.04)
+## Installation
+### Method 1 (Ubuntu 18.04)
 - Python 3.6
 - torch 1.2.0
 - torchvision 0.4.0
@@ -27,7 +27,7 @@ rained models and source code for the results reproducibility purpose are public
 - scipy 1.5.4
 - CoppeliaSim_Edu_V4_1_0_Ubuntu18_04
 
-###Method 2 (Ubuntu 20.04)
+### Method 2 (Ubuntu 20.04)
 - Python 3.8
 - torch 1.10.1
 - torchvision 0.11.2
@@ -40,12 +40,12 @@ rained models and source code for the results reproducibility purpose are public
 - scipy 1.7.3
 - CoppeliaSim_Edu_V4_2_0_Ubuntu20_04
 
-###Method 3 Singularity Container
+### Method 3 Singularity Container
 We have made a container publicly available which is useful to be used in High Performance Computing (HPC) clusters
 
 singularity .sif image file can be downloaded from [.sif](https://drive.google.com/drive/folders/1KaAugjPULuasGZQbJVwtFDrTRwi36jLD?usp=sharing) 
 It contains Ubnutu 20.04 image and all the required packages to run the model training and testing. 
 
-#Train
+## Train
 
-#Test
+## Test
