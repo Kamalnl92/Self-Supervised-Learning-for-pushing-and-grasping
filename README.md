@@ -16,29 +16,18 @@ rained models and source code for the results reproducibility purpose are public
 ## Installation
 ### Method 1 (Ubuntu 18.04)
 - Python 3.6
-- torch 1.2.0
-- torchvision 0.4.0
-- matplotlib 3.3.4
-- numpy 1.19.5
-- opencv-python 4.5.4.60
-- tensorboardX 2.4.1
-- trimesh 3.9.35
-- scikit-image 0.17.2
-- scipy 1.5.4
 - CoppeliaSim_Edu_V4_1_0_Ubuntu18_04
+
+```
+pip install -r requirementMethod1.txt
+```
 
 ### Method 2 (Ubuntu 20.04)
 - Python 3.8
-- torch 1.10.1
-- torchvision 0.11.2
-- matplotlib 3.5.1
-- numpy 1.22.1
-- opencv-python 4.5.5.62
-- tensorboardX 2.4.1
-- trimesh 3.9.42
-- scikit-image 0.19.1
-- scipy 1.7.3
 - CoppeliaSim_Edu_V4_2_0_Ubuntu20_04
+```
+pip install -r requirementMethod2.txt
+```
 
 ### Method 3 Singularity Container
 We have made a container publicly available which is useful to be used in High Performance Computing (HPC) clusters
