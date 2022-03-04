@@ -81,7 +81,7 @@ Compact scenario where the target object is occluded with structured clutter
 python main.py --stage push_grasp --num_obj 10 --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/test-10-obj-06.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
 ```
 ### Test 2
-Unstructured case of testing keep the goal object set below to 1 since the goal object has to be the green object, c is the number of objects that can be placed in the environment, max 20
+Unstructured case of testing keep the goal object set below to 1 since the goal object has to be the green object, c is the number of objects that can be placed in the environment, max 20. Thhere are more test files in the directory with a different goal object shape that can be used.
 ```
 python main.py --stage push_grasp --num_obj c --experience_replay --explore_rate_decay --is_testing --test_preset_cases --test_preset_file 'simulation/test-cases/Test0.txt' --load_snapshot --snapshot_file '.pth trained model or our trained model' --save_visualizations --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 1 
 ```
