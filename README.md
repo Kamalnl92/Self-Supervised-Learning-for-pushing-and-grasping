@@ -87,4 +87,4 @@ python evaluate.py
 
 We made use of the code made by https://github.com/xukechun/Efficient_goal-oriented_push-grasping_synergy 
 
-We  thank  the  Center  for  Information  Technology  of  theUniversity of Groningen for their support and for providingaccess to the Peregrine high performance computing cluster.
+We  thank  the  Center  for  Information  Technology  of  the University of Groningen for their support and for providingaccess to the Peregrine high performance computing cluster.
