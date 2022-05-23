@@ -1,7 +1,7 @@
 The official repository for the paper: 
 # Self-Supervised Learning for Joint Pushing and Grasping Policies in Highly Cluttered Environments
 
-Demo Video: [YouTube](https://www.youtube.com/watch?v=EUrUt9XO7sI&t=1s&ab_channel=KamalMokhtar) [Paper](https://arxiv.org/abs/2203.02511)
+Demo Video: [YouTube](https://www.youtube.com/watch?v=EUrUt9XO7sI&t=1s&ab_channel=KamalMokhtar) And [Paper](https://arxiv.org/abs/2203.02511)
 
 Robots often face situations where grasping a goal object is desirable but not feasible due to other present objects preventing the grasp action. We present a deep  Reinforcement Learning approach to learn grasping and pushing policies for manipulating a goal object in highly cluttered environments to address this problem.
 In particular, a dual reinforcement learning model approach is proposed, which presents high resilience in handling complicated scenes, reaching
@@ -87,4 +87,4 @@ python evaluate.py
 
 We made use of the code made by https://github.com/xukechun/Efficient_goal-oriented_push-grasping_synergy 
 
-We  thank  the  Center  for  Information  Technology  of  the University of Groningen for their support and for providingaccess to the Peregrine high performance computing cluster.
+We  thank  the  Center  for  Information  Technology  of  the University of Groningen for their support and for providing access to the Peregrine high performance computing cluster.
