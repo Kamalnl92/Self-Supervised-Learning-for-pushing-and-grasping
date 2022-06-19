@@ -52,7 +52,7 @@ python main.py --stage grasp_only --num_obj 5 --grasp_goal_conditioned --goal_co
 ### Train Push
 ```
 # Push training
-python main.py --stage push_only --alternating_training --grasp_goal_conditioned --goal_conditioned --goal_obj_idx 4 --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file '.pth file from the previous training' 
+python main.py --stage push_only --grasp_reward_threshold Qg --grasp_goal_conditioned --goal_conditioned --goal_obj_idx k --experience_replay --explore_rate_decay --save_visualizations  --load_snapshot --snapshot_file 'DIRECTORY OF YOUR PRE-TRAINDE GOAL-CONDITIONED PUSH-GRASP NET'
 ```
 ### Train Alternate
 To minimize the distribution mismatch problem we alternate the training we first start with the grasp training since the push has improved in performance compared to the previous stage.
