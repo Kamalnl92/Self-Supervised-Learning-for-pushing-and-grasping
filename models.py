@@ -171,23 +171,23 @@ class goal_conditioned_net(nn.Module):
         self.push_depth_trunk = torchvision.models.densenet.densenet121(pretrained=True)
         self.grasp_color_trunk = torchvision.models.densenet.densenet121(pretrained=True)
         self.grasp_depth_trunk = torchvision.models.densenet.densenet121(pretrained=True)
-        self.mask_trunk = torchvision.models.densenet.densenet121(pretrained=True)
+        # self.mask_trunk = torchvision.models.densenet.densenet121(pretrained=True)
 
         self.num_rotations = 16
 
         # Construct network branches for pushing and grasping
         self.pushnet = nn.Sequential(OrderedDict([
-            ('push-norm0', nn.BatchNorm2d(3072)),
+            ('push-norm0', nn.BatchNorm2d(2048)),
             ('push-relu0', nn.ReLU(inplace=True)),
-            ('push-conv0', nn.Conv2d(3072, 64, kernel_size=1, stride=1, bias=False)),
+            ('push-conv0', nn.Conv2d(2048, 64, kernel_size=1, stride=1, bias=False)),
             ('push-norm1', nn.BatchNorm2d(64)),
             ('push-relu1', nn.ReLU(inplace=True)),
             ('push-conv1', nn.Conv2d(64, 1, kernel_size=1, stride=1, bias=False))
         ]))
         self.graspnet = nn.Sequential(OrderedDict([
-            ('grasp-norm0', nn.BatchNorm2d(3072)),
+            ('grasp-norm0', nn.BatchNorm2d(2048)),
             ('grasp-relu0', nn.ReLU(inplace=True)),
-            ('grasp-conv0', nn.Conv2d(3072, 64, kernel_size=1, stride=1, bias=False)),
+            ('grasp-conv0', nn.Conv2d(2048, 64, kernel_size=1, stride=1, bias=False)),
             ('grasp-norm1', nn.BatchNorm2d(64)),
             ('grasp-relu1', nn.ReLU(inplace=True)),
             ('grasp-conv1', nn.Conv2d(64, 1, kernel_size=1, stride=1, bias=False))
@@ -207,7 +207,7 @@ class goal_conditioned_net(nn.Module):
         self.output_prob = []
 
 
-    def forward(self, input_color_data, input_depth_data, goal_mask_data, is_volatile=False, specific_rotation=-1):
+    def forward(self, input_color_data, input_depth_data, is_volatile=False, specific_rotation=-1):
 
         if is_volatile:
             with torch.no_grad():
@@ -232,21 +232,21 @@ class goal_conditioned_net(nn.Module):
                     if self.use_cuda:
                         rotate_color = F.grid_sample(Variable(input_color_data, volatile=True).cuda(), flow_grid_before, mode='nearest')
                         rotate_depth = F.grid_sample(Variable(input_depth_data, volatile=True).cuda(), flow_grid_before, mode='nearest')
-                        rotate_mask = F.grid_sample(Variable(goal_mask_data, volatile=True).cuda(), flow_grid_before, mode='nearest')
+                        # rotate_mask = F.grid_sample(Variable(goal_mask_data, volatile=True).cuda(), flow_grid_before, mode='nearest')
                     else:
                         rotate_color = F.grid_sample(Variable(input_color_data, volatile=True), flow_grid_before, mode='nearest')
                         rotate_depth = F.grid_sample(Variable(input_depth_data, volatile=True), flow_grid_before, mode='nearest')
-                        rotate_mask = F.grid_sample(Variable(goal_mask_data, volatile=True), flow_grid_before, mode='nearest')
+                        # rotate_mask = F.grid_sample(Variable(goal_mask_data, volatile=True), flow_grid_before, mode='nearest')
 
                     # Compute intermediate features 
-                    interm_mask_feat = self.mask_trunk.features(rotate_mask)
+                    # interm_mask_feat = self.mask_trunk.features(rotate_mask)
 
                     interm_push_color_feat = self.push_color_trunk.features(rotate_color)
                     interm_push_depth_feat = self.push_depth_trunk.features(rotate_depth)
-                    interm_push_feat = torch.cat((interm_push_color_feat, interm_push_depth_feat, interm_mask_feat), dim=1)
+                    interm_push_feat = torch.cat((interm_push_color_feat, interm_push_depth_feat), dim=1)
                     interm_grasp_color_feat = self.grasp_color_trunk.features(rotate_color)
                     interm_grasp_depth_feat = self.grasp_depth_trunk.features(rotate_depth)
-                    interm_grasp_feat = torch.cat((interm_grasp_color_feat, interm_grasp_depth_feat, interm_mask_feat), dim=1)
+                    interm_grasp_feat = torch.cat((interm_grasp_color_feat, interm_grasp_depth_feat), dim=1)
                     interm_feat.append([interm_push_feat, interm_grasp_feat])
 
                     # Compute sample grid for rotation AFTER branches
@@ -288,20 +288,20 @@ class goal_conditioned_net(nn.Module):
             if self.use_cuda:
                 rotate_color = F.grid_sample(Variable(input_color_data, requires_grad=False).cuda(), flow_grid_before, mode='nearest')
                 rotate_depth = F.grid_sample(Variable(input_depth_data, requires_grad=False).cuda(), flow_grid_before, mode='nearest')
-                rotate_mask = F.grid_sample(Variable(goal_mask_data, requires_grad=False).cuda(), flow_grid_before, mode='nearest')
+                # rotate_mask = F.grid_sample(Variable(goal_mask_data, requires_grad=False).cuda(), flow_grid_before, mode='nearest')
             else:
                 rotate_color = F.grid_sample(Variable(input_color_data, requires_grad=False), flow_grid_before, mode='nearest')
                 rotate_depth = F.grid_sample(Variable(input_depth_data, requires_grad=False), flow_grid_before, mode='nearest')
-                rotate_mask = F.grid_sample(Variable(goal_mask_data, requires_grad=False), flow_grid_before, mode='nearest')
+                # rotate_mask = F.grid_sample(Variable(goal_mask_data, requires_grad=False), flow_grid_before, mode='nearest')
 
             # Compute intermediate features
-            interm_mask_feat = self.mask_trunk.features(rotate_mask)
+            # interm_mask_feat = self.mask_trunk.features(rotate_mask)
             interm_push_color_feat = self.push_color_trunk.features(rotate_color)
             interm_push_depth_feat = self.push_depth_trunk.features(rotate_depth)
-            interm_push_feat = torch.cat((interm_push_color_feat, interm_push_depth_feat, interm_mask_feat), dim=1)
+            interm_push_feat = torch.cat((interm_push_color_feat, interm_push_depth_feat), dim=1)
             interm_grasp_color_feat = self.grasp_color_trunk.features(rotate_color)
             interm_grasp_depth_feat = self.grasp_depth_trunk.features(rotate_depth)
-            interm_grasp_feat = torch.cat((interm_grasp_color_feat, interm_grasp_depth_feat, interm_mask_feat), dim=1)
+            interm_grasp_feat = torch.cat((interm_grasp_color_feat, interm_grasp_depth_feat), dim=1)
 
             self.interm_feat.append([interm_push_feat, interm_grasp_feat])
 

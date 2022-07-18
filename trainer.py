@@ -279,13 +279,13 @@ class Trainer(object):
         return push_predictions, grasp_predictions, state_feat
 
 
-    def goal_forward(self, color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=-1):
+    def goal_forward(self, color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=-1):
 
         # Apply 2x scale to input heightmaps
         # The third dimension is rgb
         color_heightmap_2x = ndimage.zoom(color_heightmap, zoom=[2,2,1], order=0)
         depth_heightmap_2x = ndimage.zoom(depth_heightmap, zoom=[2,2], order=0)
-        goal_mask_heightmap_2x = ndimage.zoom(goal_mask_heightmap, zoom=[2,2], order=0)
+        # goal_mask_heightmap_2x = ndimage.zoom(goal_mask_heightmap, zoom=[2,2], order=0)
         assert(color_heightmap_2x.shape[0:2] == depth_heightmap_2x.shape[0:2])
 
         # Add extra padding (to handle rotations inside network)
@@ -301,7 +301,7 @@ class Trainer(object):
         color_heightmap_2x = np.concatenate((color_heightmap_2x_r, color_heightmap_2x_g, color_heightmap_2x_b), axis=2)
 
         depth_heightmap_2x =  np.pad(depth_heightmap_2x, padding_width, 'constant', constant_values=0)
-        goal_mask_heightmap_2x =  np.pad(goal_mask_heightmap_2x, padding_width, 'constant', constant_values=0)
+        # goal_mask_heightmap_2x =  np.pad(goal_mask_heightmap_2x, padding_width, 'constant', constant_values=0)
 
         # Pre-process color image (scale and normalize)
         image_mean = [0.485, 0.456, 0.406]
@@ -315,9 +315,9 @@ class Trainer(object):
         image_std = [0.03, 0.03, 0.03]
         depth_heightmap_2x.shape = (depth_heightmap_2x.shape[0], depth_heightmap_2x.shape[1], 1)
         input_depth_image = np.concatenate((depth_heightmap_2x, depth_heightmap_2x, depth_heightmap_2x), axis=2)
-        goal_mask_heightmap_2x.shape = (goal_mask_heightmap_2x.shape[0], goal_mask_heightmap_2x.shape[1], 1)
-        input_goal_mask = np.concatenate((goal_mask_heightmap_2x, goal_mask_heightmap_2x, goal_mask_heightmap_2x), axis=2)
-        input_goal_mask = input_goal_mask.astype(float)/255
+        # goal_mask_heightmap_2x.shape = (goal_mask_heightmap_2x.shape[0], goal_mask_heightmap_2x.shape[1], 1)
+        # input_goal_mask = np.concatenate((goal_mask_heightmap_2x, goal_mask_heightmap_2x, goal_mask_heightmap_2x), axis=2)
+        # input_goal_mask = input_goal_mask.astype(float)/255
         for c in range(3):
             input_depth_image[:,:,c] = (input_depth_image[:,:,c] - image_mean[c])/image_std[c]
 
@@ -327,12 +327,12 @@ class Trainer(object):
         input_color_data = torch.from_numpy(input_color_image.astype(np.float32)).permute(3,2,0,1)
         input_depth_data = torch.from_numpy(input_depth_image.astype(np.float32)).permute(3,2,0,1)
 
-        input_goal_mask.shape = (input_goal_mask.shape[0], input_goal_mask.shape[1], input_goal_mask.shape[2], 1)
-        input_goal_mask_data = torch.from_numpy(input_goal_mask.astype(np.float32)).permute(3,2,0,1)
+        # input_goal_mask.shape = (input_goal_mask.shape[0], input_goal_mask.shape[1], input_goal_mask.shape[2], 1)
+        # input_goal_mask_data = torch.from_numpy(input_goal_mask.astype(np.float32)).permute(3,2,0,1)
 
 
         # Pass input data through model
-        output_prob, state_feat= self.model.forward(input_color_data, input_depth_data, input_goal_mask_data, is_volatile, specific_rotation)
+        output_prob, state_feat= self.model.forward(input_color_data, input_depth_data, is_volatile, specific_rotation)
 
         if self.stage == 'grasp_only':
 
@@ -371,7 +371,7 @@ class Trainer(object):
 
 
     # grasp reward is rate of sucessfully-grasping
-    def get_label_value(self, primitive_action,  grasp_success, grasp_reward, improved_grasp_reward, change_detected, next_color_heightmap, next_depth_heightmap, next_goal_mask_heightmap=None, goal_catched=0, decreased_occupy_ratio=0):
+    def get_label_value(self, primitive_action,  grasp_success, grasp_reward, improved_grasp_reward, change_detected, next_color_heightmap, next_depth_heightmap, goal_catched=0, decreased_occupy_ratio=0):
 
         if self.stage == 'grasp_only':
             # Compute current reward
@@ -386,7 +386,7 @@ class Trainer(object):
                 if not self.grasp_goal_conditioned:
                     next_push_predictions, next_grasp_predictions, next_state_feat = self.forward(next_color_heightmap, next_depth_heightmap, is_volatile=True)
                 else:
-                    next_push_predictions, next_grasp_predictions, next_state_feat = self.goal_forward(next_color_heightmap, next_depth_heightmap, next_goal_mask_heightmap, is_volatile=True)
+                    next_push_predictions, next_grasp_predictions, next_state_feat = self.goal_forward(next_color_heightmap, next_depth_heightmap, is_volatile=True)
                 future_reward = np.max(next_grasp_predictions)
 
             print('Current reward: %f' % (current_reward))
@@ -427,7 +427,7 @@ class Trainer(object):
                 if not self.grasp_goal_conditioned:
                     next_push_predictions, next_grasp_predictions, next_state_feat = self.forward(next_color_heightmap, next_depth_heightmap, is_volatile=True)
                 else:
-                    next_push_predictions, next_grasp_predictions, next_state_feat = self.goal_forward(next_color_heightmap, next_depth_heightmap, next_goal_mask_heightmap, is_volatile=True)
+                    next_push_predictions, next_grasp_predictions, next_state_feat = self.goal_forward(next_color_heightmap, next_depth_heightmap, is_volatile=True)
 
                 future_reward = np.max(next_push_predictions)
 
@@ -460,7 +460,7 @@ class Trainer(object):
                 if not self.grasp_goal_conditioned:
                     next_push_predictions, next_grasp_predictions, next_state_feat = self.forward(next_color_heightmap, next_depth_heightmap, is_volatile=True)
                 else:
-                    next_push_predictions, next_grasp_predictions, next_state_feat = self.goal_forward(next_color_heightmap, next_depth_heightmap, next_goal_mask_heightmap, is_volatile=True)
+                    next_push_predictions, next_grasp_predictions, next_state_feat = self.goal_forward(next_color_heightmap, next_depth_heightmap, is_volatile=True)
 
                 future_reward = max(np.max(next_push_predictions), np.max(next_grasp_predictions))
 
@@ -476,7 +476,7 @@ class Trainer(object):
 
 
     # Compute labels and backpropagate
-    def backprop(self, color_heightmap, depth_heightmap, primitive_action, best_pix_ind, label_value, goal_mask_heightmap=None):
+    def backprop(self, color_heightmap, depth_heightmap, primitive_action, best_pix_ind, label_value):
 
         if self.stage == 'grasp_only':
             # Compute labels
@@ -502,7 +502,7 @@ class Trainer(object):
             if not self.grasp_goal_conditioned:
                 push_predictions, grasp_predictions, state_feat = self.forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
             else:
-                push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
+                push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
 
             if self.use_cuda:
                 loss = self.criterion(self.model.output_prob[0][1].view(1,320,320), Variable(torch.from_numpy(label).float().cuda())) * Variable(torch.from_numpy(label_weights).float().cuda(), requires_grad=False)
@@ -517,7 +517,7 @@ class Trainer(object):
             if not self.grasp_goal_conditioned:
                 push_predictions, grasp_predictions, state_feat = self.forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=opposite_rotate_idx)
             else:
-                push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=opposite_rotate_idx)
+                push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=opposite_rotate_idx)
 
             if self.use_cuda:
                 loss = self.criterion(self.model.output_prob[0][1].view(1,320,320), Variable(torch.from_numpy(label).float().cuda())) * Variable(torch.from_numpy(label_weights).float().cuda(),requires_grad=False)
@@ -556,7 +556,7 @@ class Trainer(object):
             if not self.grasp_goal_conditioned:
                 push_predictions, grasp_predictions, state_feat = self.forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
             else:
-                push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
+                push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
 
             if self.use_cuda:
                 loss = self.criterion(self.model.output_prob[0][0].view(1,320,320), Variable(torch.from_numpy(label).float().cuda())) * Variable(torch.from_numpy(label_weights).float().cuda(),requires_grad=False)
@@ -593,7 +593,7 @@ class Trainer(object):
                 if not self.grasp_goal_conditioned:
                     push_predictions, grasp_predictions, state_feat = self.forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
                 else:
-                    push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
+                    push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
 
                 if self.use_cuda:
                     loss = self.criterion(self.model.output_prob[0][0].view(1,320,320), Variable(torch.from_numpy(label).float().cuda())) * Variable(torch.from_numpy(label_weights).float().cuda(),requires_grad=False)
@@ -609,7 +609,7 @@ class Trainer(object):
                 if not self.grasp_goal_conditioned:
                     push_predictions, grasp_predictions, state_feat = self.forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
                 else:
-                    push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
+                    push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=best_pix_ind[0])
 
                 if self.use_cuda:
                     loss = self.criterion(self.model.output_prob[0][1].view(1,320,320), Variable(torch.from_numpy(label).float().cuda())) * Variable(torch.from_numpy(label_weights).float().cuda(),requires_grad=False)
@@ -624,7 +624,7 @@ class Trainer(object):
                 if not self.grasp_goal_conditioned:
                     push_predictions, grasp_predictions, state_feat = self.forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=opposite_rotate_idx)
                 else:
-                    push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, goal_mask_heightmap, is_volatile=False, specific_rotation=opposite_rotate_idx)
+                    push_predictions, grasp_predictions, state_feat = self.goal_forward(color_heightmap, depth_heightmap, is_volatile=False, specific_rotation=opposite_rotate_idx)
 
 
                 if self.use_cuda:

@@ -441,7 +441,7 @@ class Robot(object):
         position = np.asarray(position).copy()
         position[2] = max(position[2] - 0.04, workspace_limits[2][0] + 0.02)
         # Move gripper to location above grasp target
-        grasp_location_margin = 0.15
+        grasp_location_margin = 0.1
         location_above_grasp_target = (position[0], position[1], position[2] + grasp_location_margin)
         # Compute gripper position and linear movement increments
         tool_position = location_above_grasp_target
@@ -515,7 +515,7 @@ class Robot(object):
         push_direction = np.asarray([push_orientation[0]*np.cos(heightmap_rotation_angle) - push_orientation[1]*np.sin(heightmap_rotation_angle), push_orientation[0]*np.sin(heightmap_rotation_angle) + push_orientation[1]*np.cos(heightmap_rotation_angle)])
 
         # Move gripper to location above pushing point
-        pushing_point_margin = 0.1
+        pushing_point_margin = 0.06
         location_above_pushing_point = (position[0], position[1], position[2] + pushing_point_margin)
 
         # Compute gripper position and linear movement increments

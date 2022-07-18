@@ -208,15 +208,15 @@ def main(args):
                     nonlocal_variables['primitive_action'] = 'grasp'
                     if is_testing:
                         if not goal_conditioned and not grasp_goal_conditioned:
-                            if best_push_conf > 1.5 * best_grasp_conf:
+                            if best_push_conf > 1.1 * best_grasp_conf: #TESTING used to be * 1.5
                                 nonlocal_variables['primitive_action'] = 'push'
                         else:
                             print('border_occupy_ratio', nonlocal_variables['border_occupy_ratio'])
                             if random_scene_testing:
-                                if best_grasp_conf < 1.5:
+                                if best_grasp_conf < 1.1:
                                     nonlocal_variables['primitive_action'] = 'push'
                             else:
-                                if nonlocal_variables['border_occupy_ratio'] > 0.3 or best_grasp_conf < 1.5:
+                                if nonlocal_variables['border_occupy_ratio'] > 0.1 or best_grasp_conf < 2.5: #0.3, 1.5
                                     nonlocal_variables['primitive_action'] = 'push'
                     else:
                         if best_push_conf > best_grasp_conf:
@@ -373,7 +373,7 @@ def main(args):
                             if not grasp_goal_conditioned:
                                 latest_push_predictions, latest_grasp_predictions, latest_state_feat = trainer.forward(latest_color_heightmap, latest_valid_depth_heightmap, is_volatile=True)
                             else:
-                                latest_push_predictions, latest_grasp_predictions, latest_state_feat = trainer.goal_forward(latest_color_heightmap, latest_valid_depth_heightmap, latest_goal_mask_heightmap, is_volatile=True)
+                                latest_push_predictions, latest_grasp_predictions, latest_state_feat = trainer.goal_forward(latest_color_heightmap, latest_valid_depth_heightmap, is_volatile=True)
                             
                             # Get grasp reward after pushing
                             if goal_conditioned:
@@ -581,13 +581,13 @@ def main(args):
                     obj_grasp_prediction = np.multiply(grasp_predictions, mask)
                     grasp_predictions = obj_grasp_prediction / 255
                 else:
-                    push_predictions, grasp_predictions, state_feat = trainer.goal_forward(color_heightmap, valid_depth_heightmap, goal_mask_heightmap, is_volatile=True)
+                    push_predictions, grasp_predictions, state_feat = trainer.goal_forward(color_heightmap, valid_depth_heightmap, is_volatile=True)
 
             else:
                 if not grasp_goal_conditioned:
                     push_predictions, grasp_predictions, state_feat = trainer.forward(color_heightmap, valid_depth_heightmap, is_volatile=True)
                 else:
-                    push_predictions, grasp_predictions, state_feat = trainer.goal_forward(color_heightmap, valid_depth_heightmap, goal_mask_heightmap, is_volatile=True)
+                    push_predictions, grasp_predictions, state_feat = trainer.goal_forward(color_heightmap, valid_depth_heightmap, is_volatile=True)
             
             nonlocal_variables['push_predictions'] = push_predictions
             nonlocal_variables['grasp_predictions'] = grasp_predictions
@@ -628,7 +628,7 @@ def main(args):
                 label_value, prev_reward_value = trainer.get_label_value(prev_primitive_action, prev_grasp_success, prev_grasp_reward, prev_improved_grasp_reward, change_detected, color_heightmap, valid_depth_heightmap)
             else:
                 label_value, prev_reward_value = trainer.get_label_value(prev_primitive_action, prev_grasp_success, prev_grasp_reward, prev_improved_grasp_reward, change_detected, color_heightmap, valid_depth_heightmap, 
-                goal_mask_heightmap, nonlocal_variables['goal_catched'], nonlocal_variables['decreased_occupy_ratio'])
+                 nonlocal_variables['goal_catched'], nonlocal_variables['decreased_occupy_ratio'])
 
             trainer.label_value_log.append([label_value])
             logger.write_to_log('label-value', trainer.label_value_log)
@@ -639,7 +639,7 @@ def main(args):
             if not grasp_goal_conditioned:
                 loss = trainer.backprop(prev_color_heightmap, prev_valid_depth_heightmap, prev_primitive_action, prev_best_pix_ind, label_value)
             else:
-                loss = trainer.backprop(prev_color_heightmap, prev_valid_depth_heightmap, prev_primitive_action, prev_best_pix_ind, label_value, prev_goal_mask_heightmap)
+                loss = trainer.backprop(prev_color_heightmap, prev_valid_depth_heightmap, prev_primitive_action, prev_best_pix_ind, label_value)
             writer.add_scalar('loss', loss, trainer.iteration)
 
             episode_loss += loss
@@ -702,7 +702,7 @@ def main(args):
                         if not grasp_goal_conditioned:
                             sample_push_predictions, sample_grasp_predictions, sample_state_feat = trainer.forward(sample_color_heightmap, sample_depth_heightmap, is_volatile=True)
                         else:
-                            sample_push_predictions, sample_grasp_predictions, sample_state_feat = trainer.goal_forward(sample_color_heightmap, sample_depth_heightmap, sample_goal_mask_heightmap, is_volatile=True)
+                            sample_push_predictions, sample_grasp_predictions, sample_state_feat = trainer.goal_forward(sample_color_heightmap, sample_depth_heightmap, is_volatile=True)
 
                     sample_grasp_success = sample_reward_value == 1
                     # Get labels for sample and backpropagate
@@ -710,7 +710,7 @@ def main(args):
                     if not grasp_goal_conditioned:  
                         trainer.backprop(sample_color_heightmap, sample_depth_heightmap, sample_primitive_action, sample_best_pix_ind, trainer.label_value_log[sample_iteration])
                     else:
-                        trainer.backprop(sample_color_heightmap, sample_depth_heightmap, sample_primitive_action, sample_best_pix_ind, trainer.label_value_log[sample_iteration], sample_goal_mask_heightmap)
+                        trainer.backprop(sample_color_heightmap, sample_depth_heightmap, sample_primitive_action, sample_best_pix_ind, trainer.label_value_log[sample_iteration])
 
                     # Recompute prediction value and label for replay buffer
                     if sample_primitive_action == 'push':
