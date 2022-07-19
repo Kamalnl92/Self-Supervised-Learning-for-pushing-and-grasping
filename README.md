@@ -37,6 +37,10 @@ We have made a container publicly available which is useful to be used in High P
 singularity .sif image file can be downloaded from [.sif](https://drive.google.com/drive/folders/1KaAugjPULuasGZQbJVwtFDrTRwi36jLD?usp=sharing) 
 It contains Ubnutu 20.04 image and all the required packages to run the model training and testing. One needs to bind the project file to be able to run the project.
 
+## Branches
+There are two branches in this repository. The main one has no mask as input to the model. The *maskInput* branch has the mask of the goal object as input to the model. 
+Both trained models are available, and the rest of the procedure is the same for the two different approaches.
+
 ## Train
  We  trained  the  modelsusing  NVIDIA  V100  Graphics  Processing  Unit  for  fastertraining  time.
 ### Train Grasp

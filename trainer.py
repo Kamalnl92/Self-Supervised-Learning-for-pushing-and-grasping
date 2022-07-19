@@ -285,7 +285,6 @@ class Trainer(object):
         # The third dimension is rgb
         color_heightmap_2x = ndimage.zoom(color_heightmap, zoom=[2,2,1], order=0)
         depth_heightmap_2x = ndimage.zoom(depth_heightmap, zoom=[2,2], order=0)
-        # goal_mask_heightmap_2x = ndimage.zoom(goal_mask_heightmap, zoom=[2,2], order=0)
         assert(color_heightmap_2x.shape[0:2] == depth_heightmap_2x.shape[0:2])
 
         # Add extra padding (to handle rotations inside network)
@@ -301,7 +300,6 @@ class Trainer(object):
         color_heightmap_2x = np.concatenate((color_heightmap_2x_r, color_heightmap_2x_g, color_heightmap_2x_b), axis=2)
 
         depth_heightmap_2x =  np.pad(depth_heightmap_2x, padding_width, 'constant', constant_values=0)
-        # goal_mask_heightmap_2x =  np.pad(goal_mask_heightmap_2x, padding_width, 'constant', constant_values=0)
 
         # Pre-process color image (scale and normalize)
         image_mean = [0.485, 0.456, 0.406]
@@ -315,9 +313,7 @@ class Trainer(object):
         image_std = [0.03, 0.03, 0.03]
         depth_heightmap_2x.shape = (depth_heightmap_2x.shape[0], depth_heightmap_2x.shape[1], 1)
         input_depth_image = np.concatenate((depth_heightmap_2x, depth_heightmap_2x, depth_heightmap_2x), axis=2)
-        # goal_mask_heightmap_2x.shape = (goal_mask_heightmap_2x.shape[0], goal_mask_heightmap_2x.shape[1], 1)
-        # input_goal_mask = np.concatenate((goal_mask_heightmap_2x, goal_mask_heightmap_2x, goal_mask_heightmap_2x), axis=2)
-        # input_goal_mask = input_goal_mask.astype(float)/255
+
         for c in range(3):
             input_depth_image[:,:,c] = (input_depth_image[:,:,c] - image_mean[c])/image_std[c]
 
@@ -326,9 +322,6 @@ class Trainer(object):
         input_depth_image.shape = (input_depth_image.shape[0], input_depth_image.shape[1], input_depth_image.shape[2], 1)
         input_color_data = torch.from_numpy(input_color_image.astype(np.float32)).permute(3,2,0,1)
         input_depth_data = torch.from_numpy(input_depth_image.astype(np.float32)).permute(3,2,0,1)
-
-        # input_goal_mask.shape = (input_goal_mask.shape[0], input_goal_mask.shape[1], input_goal_mask.shape[2], 1)
-        # input_goal_mask_data = torch.from_numpy(input_goal_mask.astype(np.float32)).permute(3,2,0,1)
 
 
         # Pass input data through model
@@ -736,7 +729,6 @@ class Trainer(object):
             rotated_heightmap = ndimage.rotate(depth_heightmap, rotate_idx*(360.0/num_rotations), reshape=False, order=0)
             valid_areas = np.zeros(rotated_heightmap.shape)
             valid_areas[np.logical_and(rotated_heightmap - ndimage.interpolation.shift(rotated_heightmap, [0,-25], order=0) > 0.02, rotated_heightmap - ndimage.interpolation.shift(rotated_heightmap, [0,25], order=0) > 0.02)] = 1
-            # valid_areas = np.multiply(valid_areas, rotated_heightmap)
             blur_kernel = np.ones((25,25),np.float32)/9
             valid_areas = cv2.filter2D(valid_areas, -1, blur_kernel)
             tmp_grasp_predictions = ndimage.rotate(valid_areas, -rotate_idx*(360.0/num_rotations), reshape=False, order=0)
