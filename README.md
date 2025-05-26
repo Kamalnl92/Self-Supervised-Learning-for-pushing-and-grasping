@@ -90,5 +90,6 @@ python evaluate.py
 ## Acknowledgment
 
 We made use of the code made by https://github.com/xukechun/Efficient_goal-oriented_push-grasping_synergy 
+Plese download household objects from: https://github.com/c-yiting/pybullet-URDF-models
 
 We  thank  the  Center  for  Information  Technology  of  the University of Groningen for their support and for providing access to the Peregrine high performance computing cluster.
