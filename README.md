@@ -13,6 +13,11 @@ rained models and source code for the results reproducibility purpose are public
 
 ![Alt Text](images/figures.gif)
 
+## Gazebo
+You’ll also find the attachments containing the case files for Gazebo in Gazebo_cases folder, as well as the corresponding .obj files for the objects used.
+
+Please note: since the coordinate axes differ between CoppeliaSim and Gazebo, we’ve already swapped the x and y values accordingly in the cases and gazebo_world.txt files. So you can use them directly without additional modification.
+
 ## Scenarios showcasing clearing goal-object by pushing to be eventually grasped   
 ![Alt Text](images/shortvideo.gif)
 ## Installation
