@@ -1,0 +1,596 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+
+    <!-- Case 1 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acube/cube_green</uri>
+      <pose>0.108 0.538 0.026 3.14 0 0.56</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://aarch/arch_grey</uri>
+      <pose>0.039 0.591 0.026 1.57 0 -0.96</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://acuboid/l_cuboid_pink</uri>
+      <pose>0.159 0.6 0.026 -1.57 0 0.55</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://acuboid/l_cuboid_purple</uri>
+      <pose>0.089 0.656 0.026 1.586 1.57 2.159</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://acube/cube_pink</uri>
+      <pose>0.038 0.746 0.027 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://aarch/arch_pink</uri>
+      <pose>0.092 0.599 0.026 0 0 0.53</pose>
+    </include>
+
+
+    <!-- case 2 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acylinder/cylinder_green</uri>
+      <pose>0.0018 0.642 0.026 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://acube/cube_wood</uri>
+      <pose>0.029 0.593 0.026 1.57 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://aatriangle/triangle_blue</uri>
+      <pose>-0.043 0.64 0.026 1.57 0 0.54</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://aatriangle/triangle_pink</uri>
+      <pose>0.0486 0.644 0.026 1.57 0 -0.475</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://acube/cube_pink</uri>
+      <pose>-0.022 0.59 0.026 1.57 0 0</pose>
+    </include>
+
+
+
+    <!-- case 3 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acylinder/cylinder_green</uri>
+      <pose>0 0.63 0.035 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://acylinder/cylinder_pink</uri>
+      <pose>-0.0293 0.694 0.035 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://acylinder/cylinder_purple</uri>
+      <pose>0.053 0.633 0.035 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://acylinder/cylinder_wood</uri>
+      <pose>0.0261 0.579 0.035 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://acylinder/cylinder_wood</uri>
+      <pose>-0.0293 0.5785 0.035 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://acylinder/cylinder_purple</uri>
+      <pose>0.029 0.69 0.035 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj7</name>
+      <uri>model://acylinder/cylinder_pink</uri>
+      <pose>-0.053 0.636 0.035 0 0 0</pose>
+    </include>
+
+
+
+    <!-- case 4 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acuboid/l_cuboid_green</uri>
+      <pose>0.005 0.638 0.026 1.57 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://aatriangle/triangle_pink</uri>
+      <pose>0.0 0.689 0.026 1.57 0 3.14</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://aatriangle/triangle_blue</uri>
+      <pose>-0.073 0.609 0.026 1.57 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://aatriangle/triangle_pink</uri>
+      <pose>0.084 0.614 0.026 1.57 0 1.57</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://aatriangle/triangle_wood</uri>
+      <pose>0.0 0.533 0.026 1.57 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://acuboid/l_cuboid_blue</uri>
+      <pose>0.005 0.585 0.026 1.57 0 -1.57</pose>
+    </include>
+
+
+    <!-- case 5 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acylinder/cylinder_green</uri>
+      <pose>0.01 0.67 0.026 0 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://aarch/arch_pink</uri>
+      <pose>0.01 0.698 0.026 1.57 0 -3.14</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://acuboid/l_cuboid_blue</uri>
+      <pose>-0.065 0.67 0.026 1.57 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://acuboid/l_cuboid_pink</uri>
+      <pose>0.086 0.672 0.026 1.57 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://aarch/arch_purple</uri>
+      <pose>0.01 0.647 0.026 1.57 0 0</pose>
+    </include>
+
+
+
+
+
+
+    <!-- case 6 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acylinder/cylinder_green</uri>
+      <pose>0.0 0.665 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://aarch/arch_pink</uri>
+      <pose>-0.025 0.665 0.026 1.57 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://acuboid/l_cuboid_purple</uri>
+      <pose>0 0.587 0.026 1.57 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://acuboid/l_cuboid_pink</uri>
+      <pose>0 0.742 0.026 1.57 0 -1.57</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://acuboid/l_cuboid_blue</uri>
+      <pose>0.079 0.662 0.026 1.57 0 3.14</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://acuboid/l_cuboid_purple</uri>
+      <pose>-0.079 0.662 0.026 1.57 0 3.14</pose>
+    </include>
+
+    <include>
+      <name>obj7</name>
+      <uri>model://acube/cube_purple</uri>
+      <pose>0.079 0.742 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj8</name>
+      <uri>model://acube/cube_wood</uri>
+      <pose>0.079 0.588 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj9</name>
+      <uri>model://acube/cube_pink</uri>
+      <pose>-0.079 0.588 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj10</name>
+      <uri>model://acube/cube_pink</uri>
+      <pose>-0.079 0.742 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj11</name>
+      <uri>model://aarch/arch_purple</uri>
+      <pose>0.025 0.665 0.026 1.57 0 1.57</pose>
+    </include>
+
+
+    <!-- case 7 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acube/cube_green</uri>
+      <pose>0.041 0.62 0.026 0 0 0.65</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://acuboid/l_cuboid_blue</uri>
+      <pose>0.051 0.56 0.026 1.57 0 2.22</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://acuboid/l_cuboid_purple</uri>
+      <pose>-0.011 0.644 0.026 1.57 0 2.22</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://aarch/arch_grey</uri>
+      <pose>-0.017 0.57 0.026 1.57 0 -2.48</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://aarch/arch_grey</uri>
+      <pose>0.067 0.67 0.026 1.57 0 -0.94</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://acube/cube_wood</uri>
+      <pose>-0.071 0.596 0.026 0 0 0.67</pose>
+    </include>
+
+
+
+    <!-- case 8 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acuboid/l_cuboid_green</uri>
+      <pose>0.021 0.603 0.026 1.57 0 2.21</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://acuboid/l_cuboid_blue</uri>
+      <pose>0.0505 0.561 0.026 1.57 0 2.2</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://acuboid/l_cuboid_purple</uri>
+      <pose>-0.011 0.644 0.026 1.57 0 2.22</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://aarch/arch_grey</uri>
+      <pose>-0.0265 0.537 0.026 1.57 0 2.225</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://aarch/arch_grey</uri>
+      <pose>0.095 0.63 0.026 1.57 0 -0.94</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://acube/cube_pink</uri>
+      <pose>0.049 0.69 0.026 0 0 0.65</pose>
+    </include>
+
+    <include>
+      <name>obj7</name>
+      <uri>model://acube/cube_wood</uri>
+      <pose>-0.072 0.597 0.026 0 0 0.67</pose>
+    </include>
+
+
+    <!-- case 9 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://acuboid/l_cuboid_green</uri>
+      <pose>0.024 0.647 0.026 1.57 0 0.57</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://aarch/arch_pink</uri>
+      <pose>-0.118 0.678 0.026 1.57 0 -1.21</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://aatriangle/triangle_blue</uri>
+      <pose>-0.0297 0.633 0.026 1.57 0 -1.033</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://aatriangle/triangle_pink</uri>
+      <pose>0.11 0.62 0.026 1.57 0 0.21</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://aatriangle/triangle_wood</uri>
+      <pose>-0.001 0.727 0.026 1.57 0 -2.82</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://acuboid/l_cuboid_pink</uri>
+      <pose>0.133 0.6998 0.026 1.57 0 -3.044</pose>
+    </include>
+
+    <include>
+      <name>obj7</name>
+      <uri>model://acuboid/l_cuboid_purple</uri>
+      <pose>0.08 0.693 0.026 -1.57 0 0.035</pose>
+    </include>
+
+    <include>
+      <name>obj8</name>
+      <uri>model://acylinder/cylinder_purple</uri>
+      <pose>0.079 0.584 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj9</name>
+      <uri>model://acylinder/cylinder_pink</uri>
+      <pose>-0.0797 0.546 0.026 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>obj10</name>
+      <uri>model://acube/cube_wood</uri>
+      <pose>-0.075 0.697 0.026 -0.99 -1.57 0</pose>
+    </include>
+
+
+    <include>
+      <name>obj11</name>
+      <uri>model://aarch/arch_purple</uri>
+      <pose>0.002 0.556 0.026 1.57 0 -3</pose>
+    </include>
+
+    <include>
+      <name>obj12</name>
+      <uri>model://aatriangle/triangle_cyan</uri>
+      <pose>-0.108 0.594 0.026 0.013 0.007 -2.9</pose>
+    </include>
+
+
+
+
+    <!-- case 11 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://areal/milk_box</uri>
+      <pose>-0.0073 0.604 0.031 0 0 0.27</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://areal/soap2</uri>
+      <pose>0.0839 0.589 0.026 -1.57 0 -1.25</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://cappuccino</uri>
+      <pose>-0.07166 0.593 0.03 1.57 0 1.84</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://cappuccino</uri>
+      <pose>-0.0503 0.664 0.0246 3.142 0 -2.0</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://areal/glue</uri>
+      <pose>-0.0216 0.53 0.026 -1.57 0 1.887</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://areal/colgate</uri>
+      <pose>0.0364 0.666 0.028 1.57 0 0.64</pose>
+    </include>
+
+
+
+    <!-- case 12 -->
+
+    <include>
+      <name>obj1</name>
+      <uri>model://areal/milk_box</uri>
+      <pose>-0.0327 0.642 0.03 0 0 0.276</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://z_cos</uri>
+      <pose>-0.0556 0.569 0.014 -3.142 0 -1.274</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://sweetener</uri>
+      <pose>-0.0469 0.697 0.0176 0 0 1.85</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://z_camembert</uri>
+      <pose>-0.0824 0.619 0.014 0 0 0.284</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://z_carrs</uri>
+      <pose>0.0213 0.652 0.0176 0 0 0.314</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://shampoo</uri>
+      <pose>0.044 0.592 0.026 0 0 0.33</pose>
+    </include>
+
+
+   <!-- case 13 -->
+
+
+    <include>
+      <name>obj1</name>
+      <uri>model://areal/milk_box</uri>
+      <pose>0.0148 0.613 0.051 0 0 0</pose>
+    </include>
+
+
+    <include>
+      <name>obj2</name>
+      <uri>model://z_carrs</uri>
+      <pose>0.076 0.56 0.026 0 0 -1.55</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://cleaner</uri>
+      <pose>-0.054 0.59 0.026 1.57 0 2.0</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://z_oilcan</uri>
+      <pose>-0.027 0.655 0.036 -3.14 0 -1</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://z_tuna</uri>
+      <pose>0.004 0.54 0.09 0 0 2.12</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://chewinggum</uri>
+      <pose>0.049 0.667 0.026 1.57 0 0.66</pose>
+    </include>
+
+
+
+   <!-- case 14 -->
+
+
+    <include>
+      <name>obj1</name>
+      <uri>model://areal/milk_box</uri>
+      <pose>-0.019 0.5995 0.03 0 0 -0.58</pose>
+    </include>
+
+    <include>
+      <name>obj2</name>
+      <uri>model://teagreen</uri>
+      <pose>0.042 0.58 0.026 -3.14 0 2.53</pose>
+    </include>
+
+    <include>
+      <name>obj3</name>
+      <uri>model://salt</uri>
+      <pose>-0.09 0.575 0.026 0 0 2.47</pose>
+    </include>
+
+    <include>
+      <name>obj4</name>
+      <uri>model://sugar</uri>
+      <pose>-0.063 0.656 0.036 -3.14 0 -2.19</pose>
+    </include>
+
+    <include>
+      <name>obj5</name>
+      <uri>model://coke_can</uri>
+      <pose>0.0042 0.55 0.033 -1.57 0.36 2.45</pose>
+    </include>
+
+    <include>
+      <name>obj6</name>
+      <uri>model://rice</uri>
+      <pose>0.022 0.67 0.035 1.57 0 1.02</pose>
+    </include>
+
+
+
+  </world>
+</sdf>
+
